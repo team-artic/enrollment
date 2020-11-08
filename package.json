@@ -84,8 +84,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "nx format:write",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "nx affected:lint && nx affected:test"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
 }

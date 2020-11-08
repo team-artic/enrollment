@@ -22,5 +22,16 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "api": {
+      "tags": []
+    },
+    "enrollment": {
+      "tags": []
+    },
+    "enrollment-e2e": {
+      "tags": [],
+      "implicitDependencies": ["enrollment"]
+    }
+  }
 }

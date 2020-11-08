@@ -167,6 +167,58 @@
           }
         }
       }
+    },
+    "enrollment-material": {
+      "projectType": "library",
+      "root": "libs/enrollment/material",
+      "sourceRoot": "libs/enrollment/material/src",
+      "prefix": "enrollment",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/enrollment/material/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/enrollment/material/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "enrollment-ui": {
+      "projectType": "library",
+      "root": "libs/enrollment/ui",
+      "sourceRoot": "libs/enrollment/ui/src",
+      "prefix": "enrollment",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/enrollment/ui/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/enrollment/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
@@ -180,7 +232,8 @@
       "strict": true
     },
     "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "strict": true
     }
   }
 }

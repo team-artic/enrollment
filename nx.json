@@ -32,6 +32,12 @@
     "enrollment-e2e": {
       "tags": [],
       "implicitDependencies": ["enrollment"]
+    },
+    "enrollment-material": {
+      "tags": []
+    },
+    "enrollment-ui": {
+      "tags": []
     }
   }
 }

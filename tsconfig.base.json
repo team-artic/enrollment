@@ -15,7 +15,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@enrollment/enrollment/material": [
+        "libs/enrollment/material/src/index.ts"
+      ],
+      "@enrollment/enrollment/ui": ["libs/enrollment/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

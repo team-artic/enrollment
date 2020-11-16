@@ -16,8 +16,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 
-
-
 const materialModules = [
   FlexLayoutModule,
   MatInputModule,
@@ -33,7 +31,7 @@ const materialModules = [
   MatProgressSpinnerModule,
   MatSortModule,
   MatSlideToggleModule,
-  MatSelectModule
+  MatSelectModule,
 ];
 
 @NgModule({

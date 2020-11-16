@@ -23,11 +23,11 @@ export class Location extends BaseEntity {
   @JoinColumn({ name: 'TypeLocationId' })
   typeLocation: List;
 
-  @Column({ name: 'PadreId', type: 'int4', nullable: false })
-  padreId: number;
+  @Column({ name: 'ParentId', type: 'int4', nullable: false })
+  parentId: number;
 
-  @ManyToOne(() => Location, (location) => location.padreId)
-  @JoinColumn({ name: 'PadreId' })
+  @ManyToOne(() => Location, (location) => location.parentId)
+  @JoinColumn({ name: 'Parentid' })
   location: Location;
 
   @OneToMany(() => Location, (location) => location.location)

@@ -5,17 +5,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   selector: 'enrollment-enroll',
   templateUrl: './enroll.component.html',
   styleUrls: ['./enroll.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EnrollComponent implements OnInit {
-
   enrollForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
     this.enrollForm = this.formBuilder.group({});
-   }
-
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {}
 }

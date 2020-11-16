@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/apps/enrollment',
     '<rootDir>/libs/enrollment/material',
     '<rootDir>/libs/enrollment/ui',
+    '<rootDir>/libs/data-models',
   ],
 };

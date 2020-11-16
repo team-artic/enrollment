@@ -38,6 +38,9 @@
     },
     "enrollment-ui": {
       "tags": []
+    },
+    "data-models": {
+      "tags": []
     }
   }
 }

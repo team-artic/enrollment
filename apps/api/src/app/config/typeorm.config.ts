@@ -1,4 +1,9 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { List } from '../entities/configuration/list.entity';
+import { Location } from '../entities/configuration/location.entity';
+import { Person } from '../entities/configuration/person.entity';
+import { Student } from '../entities/enrollment/student.entity';
+import { CustomNamingStrategy } from './custom-naming.strategy';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -9,5 +14,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: 'Enrollment',
   synchronize: true,
   logging: 'all',
-  entities: [__dirname + '/../**/*.entity.{js,ts}'],
+  namingStrategy: new CustomNamingStrategy(),
+  entities: [List, Location, Person, Student],
 };

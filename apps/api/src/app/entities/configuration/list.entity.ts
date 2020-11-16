@@ -21,8 +21,14 @@ export class List extends BaseEntity {
   @JoinColumn({ name: 'ParentId' })
   parent: List;
 
-  @Column({ name: 'Description', type: 'varchar', length: 200 })
-  description: string;
+  @Column({ name: 'Code', nullable: true, type: 'varchar', length: 100 })
+  code: string;
+
+  @Column({ name: 'Name', type: 'varchar', length: 200 })
+  name: string;
+
+  @Column({ name: 'Editable', type: 'boolean' })
+  editable: string;
 
   @CreateDateColumn({ name: 'CreatedAt' })
   createdAt: Date;

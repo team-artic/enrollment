@@ -6,7 +6,7 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
 import { List } from './list.entity';
 import { Location } from './location.entity';
@@ -23,7 +23,12 @@ export class Person extends BaseEntity {
   @JoinColumn({ name: 'PadreId' })
   typesIdentifications: List;
 
-  @Column({ name: 'Identification', nullable: true, type: 'varchar', length: 30 })
+  @Column({
+    name: 'Identification',
+    nullable: true,
+    type: 'varchar',
+    length: 30,
+  })
   identification: string;
 
   @Column({ name: 'FirstName', type: 'varchar', length: 100 })
@@ -35,7 +40,12 @@ export class Person extends BaseEntity {
   @Column({ name: 'FirstSurname', nullable: false, length: 100 })
   firstSurname: string;
 
-  @Column({ name: 'SecondSurname', nullable: true, type: 'varchar', length: 100 })
+  @Column({
+    name: 'SecondSurname',
+    nullable: true,
+    type: 'varchar',
+    length: 100,
+  })
   secondSurname: string;
 
   @Column({ name: 'BirthDate', nullable: true, type: 'timestamp' })
@@ -77,7 +87,12 @@ export class Person extends BaseEntity {
   @Column({ name: 'Phone', nullable: true, type: 'varchar', length: 15 })
   phone: string;
 
-  @Column({ name: 'InstitutionProcedenica', nullable: true, type: 'varchar', length: 200 })
+  @Column({
+    name: 'InstitutionProcedenica',
+    nullable: true,
+    type: 'varchar',
+    length: 200,
+  })
   institutionProcedenica: string;
 
   @Column({ name: 'Occupation', nullable: true, type: 'varchar', length: 50 })

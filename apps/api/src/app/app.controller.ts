@@ -11,6 +11,6 @@ export class AppController {
 
   @Get()
   getData() {
-    return this.listServve.getListsParent(3);
+    return this.listServve.getListsParent(102);
   }
 }

@@ -13,7 +13,8 @@ export class ConfigurationConverter {
       list.parent = new List();
       list.parent.id = listModel.parent.id;
     }
-    list.description = listModel.description;
+    list.code = listModel.code;
+    list.name = listModel.name;
     return list;
   }
 }

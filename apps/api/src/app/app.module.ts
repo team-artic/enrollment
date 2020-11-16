@@ -6,6 +6,7 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { ListModule } from './list/list.module';
 import { PersonModule } from './person/person.module';
 import { StudentModule } from './student/student.module';
+import { LocationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { StudentModule } from './student/student.module';
     ListModule,
     PersonModule,
     StudentModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

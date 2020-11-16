@@ -13,6 +13,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 const materialModules = [
   FlexLayoutModule,
@@ -28,6 +32,8 @@ const materialModules = [
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSortModule,
+  MatSlideToggleModule,
+  MatSelectModule
 ];
 
 @NgModule({

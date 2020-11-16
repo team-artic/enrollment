@@ -1,9 +1,9 @@
 <mat-card>
-  <mat-card-title><h1>Enroll</h1></mat-card-title>
+  <mat-card-title><h1>Tarjeta Acumulativa de Matrícula</h1></mat-card-title>
   <mat-card-content>
     <mat-card>
       <mat-card-subtitle>
-        <h2>Student Info</h2>
+        <h2>Información del Estudiantes</h2>
       </mat-card-subtitle>
       <mat-card-content>
         <div fxFlex fxFlexAlign="start">
@@ -83,7 +83,12 @@
     </mat-card>
     <mat-card>
       <mat-card-subtitle>
-        <h2>Father Info</h2>
+        <div fxLayout="row" fxLayoutAlign="space-between center" >
+          <h2>Información del Padre</h2>
+          <mat-slide-toggle color="primary" style="margin-right: 25px;">
+            Acudiente
+          </mat-slide-toggle>
+        </div>
       </mat-card-subtitle>
       <mat-card-content>
         <div fxFlex fxFlexAlign="start">
@@ -135,7 +140,12 @@
     </mat-card>
     <mat-card>
       <mat-card-subtitle>
-        <h2>Mother Info</h2>
+        <div fxLayout="row" fxLayoutAlign="space-between center" >
+          <h2>Información de la Madre</h2>
+          <mat-slide-toggle color="primary" style="margin-right: 25px;">
+            Acudiente
+          </mat-slide-toggle>
+        </div>
       </mat-card-subtitle>
       <mat-card-content>
         <div fxFlex fxFlexAlign="start">
@@ -185,9 +195,9 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card>
+    <mat-card *ngIf="true">
       <mat-card-subtitle>
-        <h2>Legal Guardian Info</h2>
+        <h2>Información del Acudiente</h2>
       </mat-card-subtitle>
       <mat-card-content>
         <div fxFlex fxFlexAlign="start">
@@ -238,4 +248,8 @@
       </mat-card-content>
     </mat-card>
   </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-flat-button color="warn">Cancelar</button>
+    <button mat-flat-button color="primary">Matricular</button>
+  </mat-card-actions>
 </mat-card>

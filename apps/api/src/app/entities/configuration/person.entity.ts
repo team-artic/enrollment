@@ -1,33 +1,41 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { List } from './list.entity';
 import { Location } from './location.entity';
 
 @Entity({ schema: 'Configuration', name: 'Person' })
 export class Person extends BaseEntity {
-
   @PrimaryGeneratedColumn({ name: 'Id' })
   id: number;
 
   @Column({ name: 'TypeIdentification', type: 'int4' })
   typeIdentification: number;
 
-  @ManyToOne(() => List, list => list.id)
+  @ManyToOne(() => List, (list) => list.id)
   @JoinColumn({ name: 'PadreId' })
   typesIdentifications: List;
 
-  @Column({ name: 'Identification', type: 'varchar', length: 30})
+  @Column({ name: 'Identification', type: 'varchar', length: 30 })
   identification: string;
 
-  @Column({ name: 'FirstName', type: 'varchar', nullable: false, length: 100})
+  @Column({ name: 'FirstName', type: 'varchar', nullable: false, length: 100 })
   firstName: string;
 
-  @Column({ name: 'SecondName', type: 'varchar', length: 100})
+  @Column({ name: 'SecondName', type: 'varchar', length: 100 })
   secondName: string;
 
-  @Column({ name: 'FirstSurname', nullable: false, length: 100})
+  @Column({ name: 'FirstSurname', nullable: false, length: 100 })
   firstSurname: string;
 
-  @Column({ name: 'SecondSurname', type: 'varchar', length: 100})
+  @Column({ name: 'SecondSurname', type: 'varchar', length: 100 })
   secondSurname: string;
 
   @Column({ name: 'BirthDate', type: 'timestamp' })
@@ -36,14 +44,14 @@ export class Person extends BaseEntity {
   @Column({ name: 'PlaceBirthId', type: 'int4' })
   placeBirthId: number;
 
-  @ManyToOne(() => Location, location => location.id)
+  @ManyToOne(() => Location, (location) => location.id)
   @JoinColumn({ name: 'PlaceBirthId' })
   placeBirth: Location;
 
   @Column({ name: 'BloodGroupId', type: 'int4' })
   bloodGroupId: number;
 
-  @ManyToOne(() => List, list => list.id)
+  @ManyToOne(() => List, (list) => list.id)
   @JoinColumn({ name: 'BloodGroupId' })
   bloodGroup: List;
 
@@ -62,7 +70,7 @@ export class Person extends BaseEntity {
   @Column({ name: 'NeighborhoodId', type: 'int4' })
   neighborhoodId: number;
 
-  @ManyToOne(() => Location, location => location.id)
+  @ManyToOne(() => Location, (location) => location.id)
   @JoinColumn({ name: 'NeighborhoodId' })
   neighborhood: Location;
 
@@ -83,5 +91,4 @@ export class Person extends BaseEntity {
 
   @UpdateDateColumn({ name: 'ModifiedAt' })
   modifiedAt: Date;
-
 }

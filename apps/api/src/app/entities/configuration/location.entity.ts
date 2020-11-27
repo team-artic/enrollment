@@ -6,15 +6,9 @@ import {
   JoinColumn,
   JoinTable,
   ManyToOne,
-
-
-
   OneToMany,
-
-
-
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
 import { List } from './list.entity';
 
@@ -26,11 +20,11 @@ export class Location extends BaseEntity {
   @Column({ name: 'ParentId', type: 'int4', nullable: true })
   parentId: number;
 
-  @ManyToOne(() => Location, (location) => location.id, {nullable: true})
+  @ManyToOne(() => Location, (location) => location.id, { nullable: true })
   @JoinColumn({ name: 'ParentId' })
   parent: Location;
 
-  @OneToMany(() => Location, (location) => location.parent, {nullable: true})
+  @OneToMany(() => Location, (location) => location.parent, { nullable: true })
   locations: Location[];
 
   @Column({ name: 'TypeLocationId', type: 'int4', nullable: false })

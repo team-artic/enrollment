@@ -15,10 +15,8 @@ export class LocationService {
   async getLocationParent(parentId: number): Promise<GetLocationModel[]> {
     const locations: GetLocationModel[] = [];
     const listLocations: Location[] = await this.locationRepository.find({
-      where: [
-        {parentId: parentId}
-      ],
-      relations: ['locations']
+      where: [{ parentId: parentId }],
+      relations: ['locations'],
     });
     console.log(listLocations);
 
@@ -38,17 +36,23 @@ export class LocationService {
     return locations;
   }
 
-  async getAutocompleteLocation(filter: string, typeId: number): Promise<GetLocationModel[]> {
+  async getAutocompleteLocation(
+    filter: string,
+    typeId: number
+  ): Promise<GetLocationModel[]> {
     const locations: GetLocationModel[] = [];
     const listLocations: Location[] = await this.locationRepository.find({
-      where:  [
-        { name: Raw(name => `${name} ILIKE '%${filter}%'`), typeLocationId: typeId }
+      where: [
+        {
+          name: Raw((name) => `${name} ILIKE '%${filter}%'`),
+          typeLocationId: typeId,
+        },
       ],
       relations: ['parent'],
       order: {
-        name: 'ASC'
+        name: 'ASC',
       },
-      take: 5
+      take: 5,
     });
     console.log(listLocations);
 

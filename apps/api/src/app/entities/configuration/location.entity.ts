@@ -9,13 +9,13 @@ import {
   Tree,
   TreeChildren,
   TreeParent,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
 import { List } from './list.entity';
 
 @Entity({ schema: 'Configuration', name: 'Location' })
 @Tree('closure-table')
-export class Location  {
+export class Location {
   @PrimaryGeneratedColumn({ name: 'Id' })
   id: number;
 

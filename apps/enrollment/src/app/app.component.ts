@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StudentModel } from '@enrollment/data-models';
 
 @Component({
   selector: 'enrollment-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'enrollment';
+
+  console($event: StudentModel) {
+    console.log($event);
+
+  }
 }

@@ -1,28 +1,28 @@
 <mat-card>
   <mat-card-title><h1>Tarjeta Acumulativa de Matrícula</h1></mat-card-title>
-  <mat-card-content>
+  <mat-card-content [formGroup]="enrollForm">
     <mat-card>
       <mat-card-subtitle>
         <h2>Información del Estudiantes</h2>
       </mat-card-subtitle>
-      <mat-card-content>
+      <mat-card-content formGroupName="student">
         <div fxFlex fxFlexAlign="start">
           <div fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutGap="25px">
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Nombre</mat-label>
-              <input matInput autocomplete="off" placeholder="" />
+              <input matInput autocomplete="off" placeholder="" formControlName="firstName" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Nombre</mat-label>
-              <input matInput autocomplete="off" placeholder="" />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondName"/>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Apellido</mat-label>
-              <input matInput autocomplete="off" placeholder="" />
+              <input matInput autocomplete="off" placeholder="" formControlName="firstSurname"/>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Apellido</mat-label>
-              <input matInput autocomplete="off" placeholder="" />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondSurname"/>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
@@ -30,7 +30,7 @@
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Número de Identificación</mat-label>
-              <input matInput autocomplete="off" placeholder="" />
+              <input matInput autocomplete="off" placeholder="" formControlName="identification"/>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Fecha de Nacimiento</mat-label>
@@ -250,6 +250,6 @@
   </mat-card-content>
   <mat-card-actions align="end">
     <button mat-flat-button color="warn">Cancelar</button>
-    <button mat-flat-button color="primary">Matricular</button>
+    <button mat-flat-button color="primary" (click)="enroll()">Matricular</button>
   </mat-card-actions>
 </mat-card>

@@ -12,9 +12,16 @@ export class LocationController {
   }
 
   @Get('/municipality/:filter')
-  getLocationParent(
+  getAutocompleteMunicipality(
     @Param('filter') filter: string
   ): Promise<GetLocationModel[]> {
-    return this.locationService.getAutocompleteLocation(filter, 86);
+    return this.locationService.getAutocompleteLocation(filter, [86]);
+  }
+
+  @Get('/neigborhood/:filter')
+  getAutocompleteNeigborhood(
+    @Param('filter') filter: string
+  ): Promise<GetLocationModel[]> {
+    return this.locationService.getAutocompleteLocation(filter, [87, 88, 89]);
   }
 }

@@ -12,40 +12,19 @@ export class LocationService {
     private readonly locationRepository: LocationRepository
   ) {}
 
-  async getLocationParent(parentId: number): Promise<GetLocationModel[]> {
-    const locations: GetLocationModel[] = [];
-    const listLocations: Location[] = await this.locationRepository.find({
-      where: [{ parentId: parentId }],
-      relations: ['locations'],
-    });
-    console.log(listLocations);
-
-    listLocations.forEach((item) => {
-      const obj: GetLocationModel = new GetLocationModel();
-      obj.id = item.id;
-      if (item.parent) {
-        const objParent: GetLocationModel = new GetLocationModel();
-        objParent.id = item.parent.id;
-        objParent.name = item.parent.name;
-        obj.parent = objParent;
-      }
-      obj.name = item.name;
-      locations.push(obj);
-    });
-
-    return locations;
-  }
-
   async getAutocompleteLocation(
     filter: string,
-    typeId: number
+    types: number[]
   ): Promise<GetLocationModel[]> {
     const locations: GetLocationModel[] = [];
     const listLocations: Location[] = await this.locationRepository.find({
       where: [
         {
           name: Raw((name) => `${name} ILIKE '%${filter}%'`),
-          typeLocationId: typeId,
+          typeLocationId: Raw(
+            (typeLocationId) => `${typeLocationId} IN (:...types)`,
+            { types }
+          ),
         },
       ],
       relations: ['parent'],
@@ -54,8 +33,6 @@ export class LocationService {
       },
       take: 5,
     });
-    console.log(listLocations);
-
     listLocations.forEach((item) => {
       const obj: GetLocationModel = new GetLocationModel();
       obj.id = item.id;

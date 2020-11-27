@@ -1,9 +1,9 @@
 import { InternalServerErrorException, Logger } from '@nestjs/common';
-import { EntityRepository, TreeRepository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 import { Location } from './../entities/configuration/location.entity';
 
 @EntityRepository(Location)
-export class LocationRepository extends TreeRepository<Location> {
+export class LocationRepository extends Repository<Location> {
   private logger = new Logger(LocationRepository.name);
 
   async getListsParent(parentId: number): Promise<Location[]> {

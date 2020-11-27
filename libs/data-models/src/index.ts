@@ -1,4 +1,5 @@
 export * from './lib/configuration/get-list.model';
+export * from './lib/configuration/get-location.model';
 export * from './lib/configuration/get-person.model';
 export * from './lib/configuration/list.model';
 export * from './lib/configuration/person.model';

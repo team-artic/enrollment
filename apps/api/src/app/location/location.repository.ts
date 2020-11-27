@@ -1,10 +1,10 @@
 import { InternalServerErrorException, Logger } from '@nestjs/common';
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, TreeRepository } from 'typeorm';
 import { Location } from './../entities/configuration/location.entity';
 
 @EntityRepository(Location)
-export class ListRepository extends Repository<Location> {
-  private logger = new Logger(ListRepository.name);
+export class LocationRepository extends TreeRepository<Location> {
+  private logger = new Logger(LocationRepository.name);
 
   async getListsParent(parentId: number): Promise<Location[]> {
     return await this.find({
@@ -17,7 +17,6 @@ export class ListRepository extends Repository<Location> {
   async getLocations(search: string) {
     const query = this.createQueryBuilder('Location');
     query.where('location.description LIKE :search', { search: `%${search}%` });
-
     try {
       const locations = await query.getMany();
       return locations;

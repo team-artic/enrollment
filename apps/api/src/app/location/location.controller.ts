@@ -1,5 +1,5 @@
 import { GetLocationModel } from '@enrollment/data-models';
-import { Controller, Get, Logger, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Logger, Param } from '@nestjs/common';
 import { LocationService } from './location.service';
 
 @Controller('location')
@@ -11,10 +11,17 @@ export class LocationController {
     this.logger.setContext(LocationController.name);
   }
 
-  @Get('/:parentId')
-  getLocationParent(
-    @Param('parentId', ParseIntPipe) parentId: number
+  @Get('/municipality/:filter')
+  getAutocompleteMunicipality(
+    @Param('filter') filter: string
   ): Promise<GetLocationModel[]> {
-    return this.locationService.getLocationParent(parentId);
+    return this.locationService.getAutocompleteLocation(filter, [86]);
+  }
+
+  @Get('/neigborhood/:filter')
+  getAutocompleteNeigborhood(
+    @Param('filter') filter: string
+  ): Promise<GetLocationModel[]> {
+    return this.locationService.getAutocompleteLocation(filter, [87, 88, 89]);
   }
 }

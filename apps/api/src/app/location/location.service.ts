@@ -1,6 +1,7 @@
 import { GetLocationModel } from '@enrollment/data-models';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Raw } from 'typeorm';
 import { Location } from './../entities/configuration/location.entity';
 import { LocationRepository } from './location.repository';
 
@@ -11,13 +12,27 @@ export class LocationService {
     private readonly locationRepository: LocationRepository
   ) {}
 
-  async getLocationParent(parentId: number): Promise<GetLocationModel[]> {
+  async getAutocompleteLocation(
+    filter: string,
+    types: number[]
+  ): Promise<GetLocationModel[]> {
     const locations: GetLocationModel[] = [];
-    const parent: Location = new Location();
-    parent.id = parentId;
-    const listLocations: Location[] = await this.locationRepository.findTrees();
-    console.log(listLocations);
-
+    const listLocations: Location[] = await this.locationRepository.find({
+      where: [
+        {
+          name: Raw((name) => `${name} ILIKE '%${filter}%'`),
+          typeLocationId: Raw(
+            (typeLocationId) => `${typeLocationId} IN (:...types)`,
+            { types }
+          ),
+        },
+      ],
+      relations: ['parent'],
+      order: {
+        name: 'ASC',
+      },
+      take: 5,
+    });
     listLocations.forEach((item) => {
       const obj: GetLocationModel = new GetLocationModel();
       obj.id = item.id;

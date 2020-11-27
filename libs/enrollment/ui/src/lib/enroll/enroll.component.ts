@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { StudentModel } from '@enrollment/data-models';
 
@@ -9,7 +15,6 @@ import { StudentModel } from '@enrollment/data-models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EnrollComponent implements OnInit {
-
   @Output() onSave = new EventEmitter<StudentModel>();
 
   enrollForm: FormGroup;
@@ -83,7 +88,7 @@ export class EnrollComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   enroll() {
     this.onSave.emit(this.enrollForm.value);

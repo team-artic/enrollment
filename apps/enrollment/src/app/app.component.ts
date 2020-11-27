@@ -11,6 +11,5 @@ export class AppComponent {
 
   console($event: StudentModel) {
     console.log($event);
-
   }
 }

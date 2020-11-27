@@ -1,4 +1,4 @@
 export class GetListModel {
-  id: number;
-  description: string;
+  id!: number;
+  description!: string;
 }

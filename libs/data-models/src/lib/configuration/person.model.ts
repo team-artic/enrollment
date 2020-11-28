@@ -7,6 +7,7 @@ export class PersonModel {
   firstSurname!: string;
   secondSurname!: string;
   birthDate!: string;
+  generId!: number;
   placeBirthId!: number;
   bloodGroupId!: number;
   sisben!: boolean;

@@ -51,6 +51,13 @@ export class Person extends BaseEntity {
   @Column({ name: 'BirthDate', nullable: true, type: 'timestamp' })
   birthDate: string;
 
+  @Column({ name: 'GenderId', nullable: true, type: 'int4' })
+  genderId: number;
+
+  @ManyToOne(() => List, (list) => list.id)
+  @JoinColumn({ name: 'GenderId' })
+  gender: List;
+
   @Column({ name: 'PlaceBirthId', nullable: true, type: 'int4' })
   placeBirthId: number;
 

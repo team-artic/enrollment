@@ -33,6 +33,7 @@ export class LocationService {
       },
       take: 5,
     });
+
     listLocations.forEach((item) => {
       const obj: GetLocationModel = new GetLocationModel();
       obj.id = item.id;

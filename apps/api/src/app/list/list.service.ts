@@ -1,4 +1,4 @@
-import { ListModel } from '@enrollment/data-models';
+import { GetListModel, ListModel } from '@enrollment/data-models';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { List } from './../entities/configuration/list.entity';
@@ -18,6 +18,27 @@ export class ListService {
   async getLists(): Promise<List[]> {
     const query = this.listRepository.find();
     return await query;
+  }
+
+  async getListByType(parentId: number): Promise<GetListModel[]> {
+    const lists: GetListModel[] = [];
+    const listType: List[] = await this.listRepository.find({
+      where: {
+        parentId,
+      },
+      order: {
+        name: 'ASC',
+      },
+    });
+
+    listType.forEach((item) => {
+      const obj: GetListModel = new GetListModel();
+      obj.id = item.id;
+      obj.description = item.name;
+      lists.push(obj);
+    });
+
+    return lists;
   }
 
   getListsParent(parentId: number): Promise<List[]> {

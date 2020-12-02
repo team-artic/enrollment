@@ -1,0 +1,23 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ placeholder }}</mat-label>
+  <input
+    matInput
+    [placeholder]="placeholder"
+    [matAutocomplete]="auto"
+    [formControl]="control"
+    autocomplete="off"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="selected($event)"
+    [displayWith]="displayName"
+  >
+    <mat-option *ngFor="let item of data | async" [value]="item">
+      <span>{{ item.name }}</span>
+      <span *ngIf="item.subtitle">
+        |
+        <small>{{ item.subtitle }}</small>
+      </span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

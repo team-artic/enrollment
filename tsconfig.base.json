@@ -20,7 +20,9 @@
         "libs/enrollment/material/src/index.ts"
       ],
       "@enrollment/enrollment/ui": ["libs/enrollment/ui/src/index.ts"],
-      "@enrollment/data-models": ["libs/data-models/src/index.ts"]
+      "@enrollment/data-models": ["libs/data-models/src/index.ts"],
+      "@enrollment/enviroments": ["libs/enviroments/src/index.ts"],
+      "@enrollment/data-access": ["libs/data-access/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { StudentFormComponent } from './student-form/student-form.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: StudentFormComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

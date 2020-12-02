@@ -2,7 +2,7 @@ import { GetLocationModel } from '@enrollment/data-models';
 import { Controller, Get, Logger, Param } from '@nestjs/common';
 import { LocationService } from './location.service';
 
-@Controller('location')
+@Controller('locations')
 export class LocationController {
   constructor(
     private readonly logger: Logger,

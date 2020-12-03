@@ -6,7 +6,12 @@ import {
   EventEmitter,
   Input,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   GetListModel,
   GetLocationModel,
@@ -44,18 +49,18 @@ export class EnrollComponent implements OnInit {
       id: [],
       student: this.formBuilder.group({
         id: [],
-        firstName: [],
+        firstName: ['', [Validators.required]],
         secondName: [],
-        firstSurname: [],
+        firstSurname: ['', [Validators.required]],
         secondSurname: [],
         typeIdentification: [],
-        identification: [],
+        identification: ['', [Validators.required]],
         birthDate: [],
         placeBirthId: [],
         bloodGroupId: [],
         sisben: [false],
         healthPromotingCompany: [],
-        phone: [],
+        phone: ['', [Validators.minLength(7), Validators.maxLength(10)]],
         address: [],
         stratum: [],
         neighborhoodId: [],
@@ -64,47 +69,47 @@ export class EnrollComponent implements OnInit {
       }),
       father: this.formBuilder.group({
         id: [],
-        firstName: [],
+        firstName: ['', [Validators.required]],
         secondName: [],
-        firstSurname: [],
+        firstSurname: ['', [Validators.required]],
         secondSurname: [],
         typeIdentification: [],
-        identification: [],
+        identification: ['', [Validators.required]],
         occupation: [],
-        address: [],
+        address: ['', [Validators.required]],
         neighborhoodId: [],
-        phone: [],
+        phone: ['', [Validators.required]],
       }),
       mother: this.formBuilder.group({
         id: [],
-        firstName: [],
+        firstName: ['', [Validators.required]],
         secondName: [],
-        firstSurname: [],
+        firstSurname: ['', [Validators.required]],
         secondSurname: [],
         typeIdentification: [],
-        identification: [],
+        identification: ['', [Validators.required]],
         occupation: [],
-        address: [],
+        address: ['', [Validators.required]],
         neighborhoodId: [],
-        phone: [],
+        phone: ['', [Validators.required]],
       }),
       legalGuardian: this.formBuilder.group({
         id: [],
-        firstName: [],
+        firstName: ['', [Validators.required]],
         secondName: [],
-        firstSurname: [],
+        firstSurname: ['', [Validators.required]],
         secondSurname: [],
         typeIdentification: [],
-        identification: [],
+        identification: ['', [Validators.required]],
         occupation: [],
-        address: [],
+        address: ['', [Validators.required]],
         neighborhoodId: [],
-        phone: [],
+        phone: ['', [Validators.required]],
       }),
-      year: [],
-      grade: [],
-      enrollmentNumber: [],
-      sheetNumber: [],
+      year: [2020],
+      grade: [103],
+      enrollmentNumber: [103],
+      sheetNumber: [101],
     });
 
     this.filteredStates = this.stateCtrl.valueChanges.pipe(
@@ -154,7 +159,7 @@ export class EnrollComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //.
+    // ..
   }
 
   enroll() {
@@ -163,5 +168,9 @@ export class EnrollComponent implements OnInit {
 
   selectedPlaceOfBirth($event: AutocompleteModel) {
     this.enrollForm.get('student.placeBirthId')?.setValue($event.id);
+  }
+
+  selectedNeighborhood($event: AutocompleteModel) {
+    this.enrollForm.get('student.neighborhoodId')?.setValue($event.id);
   }
 }

@@ -35,8 +35,14 @@ export class EnrollComponent implements OnInit {
   enrollForm: FormGroup;
   stateCtrl = new FormControl();
   neighborhoodCtrl = new FormControl();
+  neighborhoodCtrlFather = new FormControl();
+  neighborhoodCtrlMother = new FormControl();
+  neighborhoodCtrlLegalGuardian = new FormControl();
   filteredStates: Observable<AutocompleteModel[]>;
   filteredNeighborhood: Observable<AutocompleteModel[]>;
+  filteredNeighborhoodFather: Observable<AutocompleteModel[]>;
+  filteredNeighborhoodMother: Observable<AutocompleteModel[]>;
+  filteredNeighborhoodLegalGuardian: Observable<AutocompleteModel[]>;
   filteredIdentificationTypes: Observable<GetListModel[]>;
   filteredBloodTypes: Observable<GetListModel[]>;
 
@@ -135,23 +141,19 @@ export class EnrollComponent implements OnInit {
 
     this.filteredNeighborhood = this.neighborhoodCtrl.valueChanges.pipe(
       startWith(''),
-      switchMap((value) => {
-        if (value) {
-          return this.locationService.autocompleteNeighborhood(value).pipe(
-            map((x: GetLocationModel[]) => {
-              return x.map((item) => {
-                return {
-                  name: item.name,
-                  id: item.id,
-                  subtitle: item.parent.name,
-                };
-              });
-            })
-          );
-        } else {
-          return of([]);
-        }
-      })
+      switchMap((value) => this.filterNeighborhood(value))
+    );
+    this.filteredNeighborhoodFather = this.neighborhoodCtrlFather.valueChanges.pipe(
+      startWith(''),
+      switchMap((value) => this.filterNeighborhood(value))
+    );
+    this.filteredNeighborhoodMother = this.neighborhoodCtrlMother.valueChanges.pipe(
+      startWith(''),
+      switchMap((value) => this.filterNeighborhood(value))
+    );
+    this.filteredNeighborhoodLegalGuardian = this.neighborhoodCtrlLegalGuardian.valueChanges.pipe(
+      startWith(''),
+      switchMap((value) => this.filterNeighborhood(value))
     );
 
     this.filteredIdentificationTypes = this.listService.getIdentificationTypes();
@@ -170,7 +172,28 @@ export class EnrollComponent implements OnInit {
     this.enrollForm.get('student.placeBirthId')?.setValue($event.id);
   }
 
-  selectedNeighborhood($event: AutocompleteModel) {
-    this.enrollForm.get('student.neighborhoodId')?.setValue($event.id);
+  selectedNeighborhood(
+    $event: AutocompleteModel,
+    object: 'student' | 'father' | 'mother' | 'legalGuardian'
+  ) {
+    this.enrollForm.get(`${object}.neighborhoodId`)?.setValue($event.id);
+  }
+
+  private filterNeighborhood(value: string): Observable<AutocompleteModel[]> {
+    if (value) {
+      return this.locationService.autocompleteNeighborhood(value).pipe(
+        map((x: GetLocationModel[]) => {
+          return x.map((item) => {
+            return {
+              name: item.name,
+              id: item.id,
+              subtitle: item.parent.name,
+            };
+          });
+        })
+      );
+    } else {
+      return of([]);
+    }
   }
 }

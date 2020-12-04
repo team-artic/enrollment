@@ -37,7 +37,7 @@ export class Student extends BaseEntity {
   @JoinColumn({ name: 'MotherId' })
   mother: Person;
 
-  @Column({ name: 'LegalGuardian', type: 'int4', nullable: false })
+  @Column({ name: 'legalGuardianId', type: 'int4', nullable: false })
   legalGuardianId: number;
 
   @ManyToOne(() => Person, (person) => person.id)

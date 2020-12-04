@@ -1,17 +1,17 @@
-import { Controller, Get, Logger, ParseIntPipe, Param } from '@nestjs/common';
+import { Controller, Get, Logger, Param, ParseIntPipe } from '@nestjs/common';
 import { ListService } from './list.service';
 
 @Controller('list')
 export class ListController {
   constructor(
     private readonly logger: Logger,
-    private readonly ListService: ListService
+    private readonly listService: ListService
   ) {
     this.logger.setContext(ListController.name);
   }
 
   @Get('/:type')
   getListByType(@Param('type', new ParseIntPipe()) type: number) {
-    return this.ListService.getListByType(type);
+    return this.listService.getListByType(type);
   }
 }

@@ -1,3 +1,4 @@
+import { LegalGuardianEnum } from '../enum/legal-guardian.enum';
 import { PersonModel } from './../configuration/person.model';
 
 export class StudentModel {
@@ -5,6 +6,7 @@ export class StudentModel {
   student!: PersonModel;
   father!: PersonModel;
   mother!: PersonModel;
+  typeLegalGuardian!: LegalGuardianEnum;
   legalGuardian!: PersonModel;
   year!: number;
   grade!: number;

@@ -18,9 +18,15 @@ import {
   StudentModel,
 } from '@enrollment/data-models';
 import { Observable, of } from 'rxjs';
-import { startWith, map, switchMap } from 'rxjs/operators';
+import {
+  startWith,
+  map,
+  switchMap,
+  distinctUntilChanged,
+} from 'rxjs/operators';
 import { AutocompleteModel } from '../autocomplete/autocomplete.model';
 import { LocationService, ListService } from '@enrollment/data-access';
+import { LegalGuardianEnum } from '@enrollment/data-models';
 
 @Component({
   selector: 'enrollment-enroll',
@@ -45,6 +51,11 @@ export class EnrollComponent implements OnInit {
   filteredNeighborhoodLegalGuardian: Observable<AutocompleteModel[]>;
   filteredIdentificationTypes: Observable<GetListModel[]>;
   filteredBloodTypes: Observable<GetListModel[]>;
+  filteredGradeTypes: Observable<GetListModel[]>;
+
+  fatherLegalGuardian = new FormControl();
+  motherLegalGuardian = new FormControl();
+  showOtherLegalGuardian = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,7 +78,7 @@ export class EnrollComponent implements OnInit {
         sisben: [false],
         healthPromotingCompany: [],
         phone: ['', [Validators.minLength(7), Validators.maxLength(10)]],
-        address: [],
+        address: ['', [Validators.required]],
         stratum: [],
         neighborhoodId: [],
         institutionProcedenica: [],
@@ -112,10 +123,11 @@ export class EnrollComponent implements OnInit {
         neighborhoodId: [],
         phone: ['', [Validators.required]],
       }),
-      year: [2020],
-      grade: [103],
-      enrollmentNumber: [103],
-      sheetNumber: [101],
+      year: [new Date().getFullYear()],
+      grade: [],
+      enrollmentNumber: [],
+      sheetNumber: [],
+      typeLegalGuardian: [],
     });
 
     this.filteredStates = this.stateCtrl.valueChanges.pipe(
@@ -158,6 +170,41 @@ export class EnrollComponent implements OnInit {
 
     this.filteredIdentificationTypes = this.listService.getIdentificationTypes();
     this.filteredBloodTypes = this.listService.getBloodTypes();
+    this.filteredGradeTypes = this.listService.getGradeType();
+
+    this.fatherLegalGuardian.valueChanges
+      .pipe(distinctUntilChanged())
+      .subscribe((value) => {
+        if (value) {
+          this.motherLegalGuardian.setValue(null);
+          this.enrollForm
+            .get('typeLegalGuardian')
+            ?.patchValue(LegalGuardianEnum.FATHER);
+          this.showOtherLegalGuardian = !value;
+        } else {
+          this.showOtherLegalGuardian = true;
+          this.enrollForm
+            .get('typeLegalGuardian')
+            ?.patchValue(LegalGuardianEnum.OTHER);
+        }
+      });
+
+    this.motherLegalGuardian.valueChanges
+      .pipe(distinctUntilChanged())
+      .subscribe((value) => {
+        if (value) {
+          this.fatherLegalGuardian.setValue(null);
+          this.enrollForm
+            .get('typeLegalGuardian')
+            ?.patchValue(LegalGuardianEnum.MOTHER);
+          this.showOtherLegalGuardian = false;
+        } else {
+          this.showOtherLegalGuardian = true;
+          this.enrollForm
+            .get('typeLegalGuardian')
+            ?.patchValue(LegalGuardianEnum.OTHER);
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -177,6 +224,11 @@ export class EnrollComponent implements OnInit {
     object: 'student' | 'father' | 'mother' | 'legalGuardian'
   ) {
     this.enrollForm.get(`${object}.neighborhoodId`)?.setValue($event.id);
+  }
+
+  copyAddress(object: 'father' | 'mother' | 'legalGuardian') {
+    const studentAddress = this.enrollForm.get('student.address')?.value;
+    this.enrollForm.get(`${object}.address`)?.setValue(studentAddress);
   }
 
   private filterNeighborhood(value: string): Observable<AutocompleteModel[]> {

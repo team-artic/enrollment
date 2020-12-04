@@ -5,7 +5,59 @@
   <mat-card-content [formGroup]="enrollForm">
     <mat-card>
       <mat-card-subtitle>
-        <h2>Información del Estudiantes</h2>
+        <h2>Datos básicos</h2>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div fxFlex fxFlexAlign="start">
+          <div fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutGap="25px">
+            <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
+              <mat-label>Año Escolar</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                placeholder=""
+                formControlName="year"
+                maxlength="4"
+                required
+                digitOnly
+              />
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
+              <mat-label>Grado</mat-label>
+              <mat-select formControlName="grade">
+                <mat-option
+                  *ngFor="let gradeType of filteredGradeTypes | async"
+                  [value]="gradeType.id"
+                >
+                  {{ gradeType.description }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
+              <mat-label>Número de Matricula</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                placeholder=""
+                formControlName="enrollmentNumber"
+              />
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
+              <mat-label>Número de Folio</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                placeholder=""
+                formControlName="sheetNumber"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-subtitle>
+        <h2>Información del Estudiante</h2>
       </mat-card-subtitle>
       <mat-card-content formGroupName="student">
         <div fxFlex fxFlexAlign="start">
@@ -131,6 +183,7 @@
                 autocomplete="off"
                 placeholder=""
                 formControlName="phone"
+                digitOnly
               />
             </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
@@ -140,6 +193,7 @@
                 autocomplete="off"
                 placeholder=""
                 formControlName="address"
+                required
               />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
@@ -149,6 +203,7 @@
                 autocomplete="off"
                 placeholder=""
                 formControlName="stratum"
+                digitOnly
               />
             </mat-form-field>
             <enrollment-autocomplete
@@ -157,7 +212,8 @@
               [placeholder]="'Barrio'"
               (selectedValue)="selectedNeighborhood($event, 'student')"
               [control]="neighborhoodCtrl"
-            ></enrollment-autocomplete>
+            >
+            </enrollment-autocomplete>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Institución de Procedencia</mat-label>
               <input
@@ -181,7 +237,11 @@
       <mat-card-subtitle>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <h2>Información del Padre</h2>
-          <mat-slide-toggle color="primary" style="margin-right: 25px;">
+          <mat-slide-toggle
+            color="primary"
+            style="margin-right: 25px;"
+            [formControl]="fatherLegalGuardian"
+          >
             Acudiente
           </mat-slide-toggle>
         </div>
@@ -269,6 +329,14 @@
                 required
                 formControlName="address"
               />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="copyAddress('father')"
+                matTooltip="Copiar dirección del estudiante"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
             </mat-form-field>
             <enrollment-autocomplete
               fxFlex="calc(25% - 25px)"
@@ -284,6 +352,7 @@
                 autocomplete="off"
                 placeholder=""
                 formControlName="phone"
+                digitOnly
               />
             </mat-form-field>
             <div></div>
@@ -295,7 +364,11 @@
       <mat-card-subtitle>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <h2>Información de la Madre</h2>
-          <mat-slide-toggle color="primary" style="margin-right: 25px;">
+          <mat-slide-toggle
+            color="primary"
+            style="margin-right: 25px;"
+            [formControl]="motherLegalGuardian"
+          >
             Acudiente
           </mat-slide-toggle>
         </div>
@@ -383,6 +456,14 @@
                 required
                 formControlName="address"
               />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="copyAddress('mother')"
+                matTooltip="Copiar dirección del estudiante"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
             </mat-form-field>
             <enrollment-autocomplete
               fxFlex="calc(25% - 25px)"
@@ -398,6 +479,7 @@
                 autocomplete="off"
                 placeholder=""
                 formControlName="phone"
+                digitOnly
               />
             </mat-form-field>
             <div></div>
@@ -405,7 +487,7 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card *ngIf="true">
+    <mat-card *ngIf="showOtherLegalGuardian">
       <mat-card-subtitle>
         <h2>Información del Acudiente</h2>
       </mat-card-subtitle>
@@ -492,6 +574,14 @@
                 required
                 formControlName="address"
               />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="copyAddress('legalGuardian')"
+                matTooltip="Copiar dirección del estudiante"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
             </mat-form-field>
             <enrollment-autocomplete
               fxFlex="calc(25% - 25px)"
@@ -507,6 +597,7 @@
                 autocomplete="off"
                 placeholder=""
                 formControlName="phone"
+                digitOnly
               />
             </mat-form-field>
             <div></div>

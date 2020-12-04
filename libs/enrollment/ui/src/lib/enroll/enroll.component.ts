@@ -25,7 +25,11 @@ import {
   distinctUntilChanged,
 } from 'rxjs/operators';
 import { AutocompleteModel } from '../autocomplete/autocomplete.model';
-import { LocationService, ListService } from '@enrollment/data-access';
+import {
+  LocationService,
+  ListService,
+  StudentService,
+} from '@enrollment/data-access';
 import { LegalGuardianEnum } from '@enrollment/data-models';
 
 @Component({
@@ -60,7 +64,8 @@ export class EnrollComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private locationService: LocationService,
-    private listService: ListService
+    private listService: ListService,
+    private studentService: StudentService
   ) {
     this.enrollForm = this.formBuilder.group({
       id: [],
@@ -212,7 +217,9 @@ export class EnrollComponent implements OnInit {
   }
 
   enroll() {
-    this.onSave.emit(this.enrollForm.value);
+    const model = this.enrollForm.value;
+    this.onSave.emit(model);
+    this.studentService.enroll(model).subscribe((data) => console.log(data));
   }
 
   selectedPlaceOfBirth($event: AutocompleteModel) {

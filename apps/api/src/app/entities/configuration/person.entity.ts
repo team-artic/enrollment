@@ -16,11 +16,11 @@ export class Person extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'Id' })
   id: number;
 
-  @Column({ name: 'TypeIdentification', nullable: true, type: 'int4' })
-  typeIdentification: number;
+  @Column({ name: 'TypeIdentificationId', nullable: true, type: 'int4' })
+  typeIdentificationId: number;
 
   @ManyToOne(() => List, (list) => list.id)
-  @JoinColumn({ name: 'PadreId' })
+  @JoinColumn({ name: 'TypeIdentificationId' })
   typesIdentifications: List;
 
   @Column({

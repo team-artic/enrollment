@@ -17,7 +17,7 @@ import { TableComponent } from './table/table.component';
     ReactiveFormsModule,
     DataAccessModule,
     DigitOnlyModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
   ],
   declarations: [TableComponent, EnrollComponent, AutocompleteComponent],
   exports: [

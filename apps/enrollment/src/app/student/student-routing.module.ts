@@ -11,8 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'list',
-    component: StudentListComponent
-  }
+    component: StudentListComponent,
+  },
 ];
 
 @NgModule({

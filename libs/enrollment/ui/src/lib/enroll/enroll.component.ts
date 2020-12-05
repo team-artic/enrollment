@@ -288,13 +288,13 @@ export class EnrollComponent implements OnInit {
 
   private changePermissionLegalGuardian(remove: boolean) {
     if (remove) {
-      this.enrollForm.get('legalGuardian.firstName')?.disable()
+      this.enrollForm.get('legalGuardian.firstName')?.disable();
       this.enrollForm.get('legalGuardian.firstSurname')?.disable();
       this.enrollForm.get('legalGuardian.identification')?.disable();
       this.enrollForm.get('legalGuardian.address')?.disable();
       this.enrollForm.get('legalGuardian.phone')?.disable();
     } else {
-      this.enrollForm.get('legalGuardian.firstName')?.enable()
+      this.enrollForm.get('legalGuardian.firstName')?.enable();
       this.enrollForm.get('legalGuardian.firstSurname')?.enable();
       this.enrollForm.get('legalGuardian.identification')?.enable();
       this.enrollForm.get('legalGuardian.address')?.enable();
@@ -302,8 +302,7 @@ export class EnrollComponent implements OnInit {
     }
   }
 
-
-  log(){
+  log() {
     console.log(this.enrollForm);
   }
 }

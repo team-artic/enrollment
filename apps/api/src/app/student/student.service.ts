@@ -3,8 +3,9 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   IPaginationOptions,
-  paginate,
-  Pagination,
+
+  paginateRaw,
+  Pagination
 } from 'nestjs-typeorm-paginate';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 import { Person } from '../entities/configuration/person.entity';
@@ -25,11 +26,21 @@ export class StudentService {
   async paginate(options: IPaginationOptions): Promise<Pagination<Student>> {
     const queryBuilder = this.studentRepository.createQueryBuilder('s');
     queryBuilder.leftJoinAndSelect('s.student', 'p');
+    queryBuilder.leftJoinAndSelect('s.grade', 'gr');
     queryBuilder
       .leftJoinAndSelect('p.typesIdentification', 't')
-      .select(['s.id', 't.name', 'p.identification', 'p.firstName']);
+      .leftJoinAndSelect('p.gender', 'g')
+      .select([
+        's.id as id',
+        't.name as identificationType',
+        'p.identification as identification',
+        'g.name as gender',
+        'p.phone as phone',
+        'gr.name as grade'
+      ])
+    .addSelect('CONCAT(p.firstName, \' \', p.secondName, \' \',  p.firstSurname, \' \', p.secondSurname)', 'name');
     queryBuilder.orderBy('p.firstName', 'DESC');
-    return paginate<Student>(queryBuilder, options);
+    return paginateRaw(queryBuilder, options);
   }
 
   @Transaction()

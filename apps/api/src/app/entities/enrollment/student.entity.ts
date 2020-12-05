@@ -19,7 +19,7 @@ export class Student extends BaseEntity {
   @Column({ name: 'StudentId', type: 'int4', nullable: false })
   studentId: number;
 
-  @ManyToOne(() => Person, (person) => person.id)
+  @ManyToOne(() => Person, (person) => person.id, { eager: true })
   @JoinColumn({ name: 'StudentId' })
   student: Person;
 

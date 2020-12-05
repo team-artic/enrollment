@@ -1,6 +1,6 @@
 export class PersonModel {
   id!: number;
-  typeIdentification!: number;
+  typeIdentificationId!: number;
   identification!: string;
   firstName!: string;
   secondName!: string;

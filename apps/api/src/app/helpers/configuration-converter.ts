@@ -6,8 +6,6 @@ import { List } from './../entities/configuration/list.entity';
 export class ConfigurationConverter {
   static toList(listModel: ListModel, update: boolean): List {
     const list: List = new List();
-    console.log('actualizar ' + update + ' converter ' + listModel);
-    console.log(listModel);
     if (update) {
       list.id = listModel.id;
     }
@@ -30,7 +28,6 @@ export class ConfigurationConverter {
 
   static toPerson(personModel: PersonModel, update: boolean): Person {
     const person: Person = new Person();
-    console.log('actualizar ' + update + ' converter ', personModel);
     if (update) {
       person.id = personModel.id;
     }

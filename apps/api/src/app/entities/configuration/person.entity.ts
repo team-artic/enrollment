@@ -21,7 +21,7 @@ export class Person extends BaseEntity {
 
   @ManyToOne(() => List, (list) => list.id)
   @JoinColumn({ name: 'TypeIdentificationId' })
-  typesIdentifications: List;
+  typesIdentification: List;
 
   @Column({
     name: 'Identification',

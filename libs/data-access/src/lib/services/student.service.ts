@@ -15,4 +15,8 @@ export class StudentService {
   enroll(studentModel: StudentModel): Observable<StudentModel> {
     return this.httpClient.post<StudentModel>(this.studentUrl, studentModel);
   }
+
+  getStudents() {
+    return this.httpClient.get(`${this.studentUrl}`);
+  }
 }

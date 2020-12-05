@@ -3,9 +3,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   IPaginationOptions,
-
   paginateRaw,
-  Pagination
+  Pagination,
 } from 'nestjs-typeorm-paginate';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 import { Person } from '../entities/configuration/person.entity';
@@ -36,9 +35,12 @@ export class StudentService {
         'p.identification as identification',
         'g.name as gender',
         'p.phone as phone',
-        'gr.name as grade'
+        'gr.name as grade',
       ])
-    .addSelect('CONCAT(p.firstName, \' \', p.secondName, \' \',  p.firstSurname, \' \', p.secondSurname)', 'name');
+      .addSelect(
+        "CONCAT(p.firstName, ' ', p.secondName, ' ',  p.firstSurname, ' ', p.secondSurname)",
+        'name'
+      );
     queryBuilder.orderBy('p.firstName', 'DESC');
     return paginateRaw(queryBuilder, options);
   }

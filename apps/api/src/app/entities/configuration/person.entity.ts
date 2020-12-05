@@ -6,8 +6,7 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
 import { List } from './list.entity';
 import { Location } from './location.entity';
@@ -114,5 +113,4 @@ export class Person extends BaseEntity {
 
   @UpdateDateColumn({ name: 'ModifiedAt' })
   modifiedAt: Date;
-
 }

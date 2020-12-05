@@ -12,44 +12,24 @@
           <div fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutGap="25px">
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Año Escolar</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="year"
-                maxlength="4"
-                required
-                digitOnly
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="year" maxlength="4" required
+                digitOnly />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Grado</mat-label>
-              <mat-select formControlName="grade">
-                <mat-option
-                  *ngFor="let gradeType of filteredGradeTypes | async"
-                  [value]="gradeType.id"
-                >
+              <mat-select formControlName="grade" required>
+                <mat-option *ngFor="let gradeType of filteredGradeTypes | async" [value]="gradeType.id">
                   {{ gradeType.description }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Número de Matricula</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="enrollmentNumber"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="enrollmentNumber" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Número de Folio</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="sheetNumber"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="sheetNumber" />
             </mat-form-field>
           </div>
         </div>
@@ -64,98 +44,48 @@
           <div fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutGap="25px">
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Nombre</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="firstName"
-                required
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="firstName" required />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Nombre</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="secondName"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondName" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Apellido</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="firstSurname"
-                required
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="firstSurname" required />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Apellido</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="secondSurname"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondSurname" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
-              <mat-select formControlName="typeIdentification">
-                <mat-option
-                  *ngFor="
+              <mat-select formControlName="typeIdentificationId">
+                <mat-option *ngFor="
                     let identificationType of filteredIdentificationTypes
                       | async
-                  "
-                  [value]="identificationType.id"
-                >
+                  " [value]="identificationType.id">
                   {{ identificationType.description }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Número de Identificación</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="identification"
-                required
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="identification" required />
             </mat-form-field>
-            <mat-form-field
-              color="accent"
-              fxFlex="calc(25% - 25px)"
-              appearance="outline"
-            >
+            <mat-form-field color="accent" fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Fecha de Nacimiento</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                [matDatepicker]="picker"
-                formControlName="birthDate"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
+              <input matInput autocomplete="off" [matDatepicker]="picker" formControlName="birthDate" />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker color="primary"></mat-datepicker>
             </mat-form-field>
-            <enrollment-autocomplete
-              fxFlex="calc(25% - 25px)"
-              [data]="filteredStates"
-              [placeholder]="'Lugar de Nacimiento'"
-              (selectedValue)="selectedPlaceOfBirth($event)"
-              [control]="stateCtrl"
-            ></enrollment-autocomplete>
+            <enrollment-autocomplete fxFlex="calc(25% - 25px)" [data]="filteredStates"
+              [placeholder]="'Lugar de Nacimiento'" (selectedValue)="selectedPlaceOfBirth($event)"
+              [control]="placeOfBirthCtrl"></enrollment-autocomplete>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Grupo Sanguíneo</mat-label>
               <mat-select formControlName="bloodGroupId">
-                <mat-option
-                  *ngFor="let bloodType of filteredBloodTypes | async"
-                  [value]="bloodType.id"
-                >
+                <mat-option *ngFor="let bloodType of filteredBloodTypes | async" [value]="bloodType.id">
                   {{ bloodType.description }}
                 </mat-option>
               </mat-select>
@@ -169,64 +99,29 @@
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Seguro</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="healthPromotingCompany"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="healthPromotingCompany" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Telefono</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="phone"
-                digitOnly
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="phone" required digitOnly />
             </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
               <mat-label>Dirección</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="address"
-                required
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="address" required />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Estrato</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="stratum"
-                digitOnly
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="stratum" digitOnly />
             </mat-form-field>
-            <enrollment-autocomplete
-              fxFlex="calc(25% - 25px)"
-              [data]="filteredNeighborhood"
-              [placeholder]="'Barrio'"
-              (selectedValue)="selectedNeighborhood($event, 'student')"
-              [control]="neighborhoodCtrl"
-            >
+            <enrollment-autocomplete fxFlex="calc(25% - 25px)" [data]="filteredNeighborhood" [placeholder]="'Barrio'"
+              (selectedValue)="selectedNeighborhood($event, 'student')" [control]="neighborhoodCtrl">
             </enrollment-autocomplete>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Institución de Procedencia</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="institutionProcedenica"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="institutionProcedenica" />
             </mat-form-field>
             <div fxFlex="calc(25% - 25px)" style="padding-top: 15px;">
-              <mat-checkbox color="primary" formControlName="displaced"
-                >Desplazado?</mat-checkbox
-              >
+              <mat-checkbox color="primary" formControlName="displaced">Desplazado?</mat-checkbox>
             </div>
             <div></div>
           </div>
@@ -237,11 +132,7 @@
       <mat-card-subtitle>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <h2>Información del Padre</h2>
-          <mat-slide-toggle
-            color="primary"
-            style="margin-right: 25px;"
-            [formControl]="fatherLegalGuardian"
-          >
+          <mat-slide-toggle color="primary" style="margin-right: 25px;" [formControl]="fatherLegalGuardian">
             Acudiente
           </mat-slide-toggle>
         </div>
@@ -251,109 +142,53 @@
           <div fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutGap="25px">
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Nombre</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="firstName"
-              />
+              <input matInput autocomplete="off" placeholder="" required formControlName="firstName" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Nombre</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="secondName"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondName" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Apellido</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="firstSurname"
-              />
+              <input matInput autocomplete="off" placeholder="" required formControlName="firstSurname" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Apellido</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="secondSurname"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondSurname" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
-              <mat-select formControlName="typeIdentification">
-                <mat-option
-                  *ngFor="
+              <mat-select formControlName="typeIdentificationId">
+                <mat-option *ngFor="
                     let identificationType of filteredIdentificationTypes
                       | async
-                  "
-                  [value]="identificationType.id"
-                >
+                  " [value]="identificationType.id">
                   {{ identificationType.description }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Número de Identificación</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="identification"
-                required
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="identification" required />
             </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
               <mat-label>Ocupación</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="occupation"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="occupation" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
               <mat-label>Dirección</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="address"
-              />
-              <button
-                mat-icon-button
-                matSuffix
-                (click)="copyAddress('father')"
-                matTooltip="Copiar dirección del estudiante"
-              >
+              <input matInput autocomplete="off" placeholder="" required formControlName="address" />
+              <button mat-icon-button matSuffix (click)="copyAddress('father')"
+                matTooltip="Copiar dirección del estudiante">
                 <mat-icon>content_copy</mat-icon>
               </button>
             </mat-form-field>
-            <enrollment-autocomplete
-              fxFlex="calc(25% - 25px)"
-              [data]="filteredNeighborhoodFather"
-              [placeholder]="'Barrio'"
-              (selectedValue)="selectedNeighborhood($event, 'father')"
-              [control]="neighborhoodCtrlFather"
-            ></enrollment-autocomplete>
+            <enrollment-autocomplete fxFlex="calc(25% - 25px)" [data]="filteredNeighborhoodFather"
+              [placeholder]="'Barrio'" (selectedValue)="selectedNeighborhood($event, 'father')"
+              [control]="neighborhoodCtrlFather"></enrollment-autocomplete>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Telefono</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="phone"
-                digitOnly
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="phone" required digitOnly />
             </mat-form-field>
             <div></div>
           </div>
@@ -364,11 +199,7 @@
       <mat-card-subtitle>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <h2>Información de la Madre</h2>
-          <mat-slide-toggle
-            color="primary"
-            style="margin-right: 25px;"
-            [formControl]="motherLegalGuardian"
-          >
+          <mat-slide-toggle color="primary" style="margin-right: 25px;" [formControl]="motherLegalGuardian">
             Acudiente
           </mat-slide-toggle>
         </div>
@@ -378,109 +209,53 @@
           <div fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutGap="25px">
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Nombre</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="firstName"
-              />
+              <input matInput autocomplete="off" placeholder="" required formControlName="firstName" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Nombre</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="secondName"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondName" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Apellido</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="firstSurname"
-              />
+              <input matInput autocomplete="off" placeholder="" required formControlName="firstSurname" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Apellido</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="secondSurname"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondSurname" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
-              <mat-select formControlName="typeIdentification">
-                <mat-option
-                  *ngFor="
+              <mat-select formControlName="typeIdentificationId">
+                <mat-option *ngFor="
                     let identificationType of filteredIdentificationTypes
                       | async
-                  "
-                  [value]="identificationType.id"
-                >
+                  " [value]="identificationType.id">
                   {{ identificationType.description }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Número de Identificación</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="identification"
-                required
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="identification" required />
             </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
               <mat-label>Ocupación</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="occupation"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="occupation" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
               <mat-label>Dirección</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="address"
-              />
-              <button
-                mat-icon-button
-                matSuffix
-                (click)="copyAddress('mother')"
-                matTooltip="Copiar dirección del estudiante"
-              >
+              <input matInput autocomplete="off" placeholder="" required formControlName="address" />
+              <button mat-icon-button matSuffix (click)="copyAddress('mother')"
+                matTooltip="Copiar dirección del estudiante">
                 <mat-icon>content_copy</mat-icon>
               </button>
             </mat-form-field>
-            <enrollment-autocomplete
-              fxFlex="calc(25% - 25px)"
-              [data]="filteredNeighborhoodMother"
-              [placeholder]="'Barrio'"
-              (selectedValue)="selectedNeighborhood($event, 'mother')"
-              [control]="neighborhoodCtrlMother"
-            ></enrollment-autocomplete>
+            <enrollment-autocomplete fxFlex="calc(25% - 25px)" [data]="filteredNeighborhoodMother"
+              [placeholder]="'Barrio'" (selectedValue)="selectedNeighborhood($event, 'mother')"
+              [control]="neighborhoodCtrlMother"></enrollment-autocomplete>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Telefono</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="phone"
-                digitOnly
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="phone" required digitOnly />
             </mat-form-field>
             <div></div>
           </div>
@@ -496,109 +271,53 @@
           <div fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutGap="25px">
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Nombre</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="firstName"
-              />
+              <input matInput autocomplete="off" placeholder="" required formControlName="firstName" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Nombre</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="secondName"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondName" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Primer Apellido</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="firstSurname"
-              />
+              <input matInput autocomplete="off" placeholder="" required formControlName="firstSurname" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Segundo Apellido</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="secondSurname"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="secondSurname" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
-              <mat-select formControlName="typeIdentification">
-                <mat-option
-                  *ngFor="
+              <mat-select formControlName="typeIdentificationId">
+                <mat-option *ngFor="
                     let identificationType of filteredIdentificationTypes
                       | async
-                  "
-                  [value]="identificationType.id"
-                >
+                  " [value]="identificationType.id">
                   {{ identificationType.description }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Número de Identificación</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="identification"
-                required
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="identification" required />
             </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
               <mat-label>Ocupación</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="occupation"
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="occupation" />
             </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
               <mat-label>Dirección</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                required
-                formControlName="address"
-              />
-              <button
-                mat-icon-button
-                matSuffix
-                (click)="copyAddress('legalGuardian')"
-                matTooltip="Copiar dirección del estudiante"
-              >
+              <input matInput autocomplete="off" placeholder="" required formControlName="address" />
+              <button mat-icon-button matSuffix (click)="copyAddress('legalGuardian')"
+                matTooltip="Copiar dirección del estudiante">
                 <mat-icon>content_copy</mat-icon>
               </button>
             </mat-form-field>
-            <enrollment-autocomplete
-              fxFlex="calc(25% - 25px)"
-              [data]="filteredNeighborhoodLegalGuardian"
-              [placeholder]="'Barrio'"
-              (selectedValue)="selectedNeighborhood($event, 'legalGuardian')"
-              [control]="neighborhoodCtrlLegalGuardian"
-            ></enrollment-autocomplete>
+            <enrollment-autocomplete fxFlex="calc(25% - 25px)" [data]="filteredNeighborhoodLegalGuardian"
+              [placeholder]="'Barrio'" (selectedValue)="selectedNeighborhood($event, 'legalGuardian')"
+              [control]="neighborhoodCtrlLegalGuardian"></enrollment-autocomplete>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Telefono</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="phone"
-                digitOnly
-              />
+              <input matInput autocomplete="off" placeholder="" formControlName="phone" required digitOnly />
             </mat-form-field>
             <div></div>
           </div>
@@ -608,8 +327,9 @@
   </mat-card-content>
   <mat-card-actions align="end">
     <button mat-flat-button color="warn">Cancelar</button>
-    <button mat-flat-button color="primary" (click)="enroll()">
+    <button mat-flat-button color="primary" [disabled]="enrollForm.invalid" (click)="enroll()">
       Matricular
     </button>
   </mat-card-actions>
 </mat-card>
+

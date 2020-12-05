@@ -4,7 +4,6 @@ import {
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
-  Input,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -40,10 +39,9 @@ import { LegalGuardianEnum } from '@enrollment/data-models';
 })
 export class EnrollComponent implements OnInit {
   @Output() onSave = new EventEmitter<StudentModel>();
-  @Input() autocompleteMunicipaltity: Observable<AutocompleteModel[]> = of([]);
 
   enrollForm: FormGroup;
-  stateCtrl = new FormControl();
+  placeOfBirthCtrl = new FormControl();
   neighborhoodCtrl = new FormControl();
   neighborhoodCtrlFather = new FormControl();
   neighborhoodCtrlMother = new FormControl();
@@ -75,14 +73,21 @@ export class EnrollComponent implements OnInit {
         secondName: [],
         firstSurname: ['', [Validators.required]],
         secondSurname: [],
-        typeIdentification: [],
+        typeIdentificationId: [],
         identification: ['', [Validators.required]],
         birthDate: [],
         placeBirthId: [],
         bloodGroupId: [],
         sisben: [false],
         healthPromotingCompany: [],
-        phone: ['', [Validators.minLength(7), Validators.maxLength(10)]],
+        phone: [
+          '',
+          [
+            Validators.minLength(7),
+            Validators.maxLength(10),
+            Validators.required,
+          ],
+        ],
         address: ['', [Validators.required]],
         stratum: [],
         neighborhoodId: [],
@@ -95,12 +100,19 @@ export class EnrollComponent implements OnInit {
         secondName: [],
         firstSurname: ['', [Validators.required]],
         secondSurname: [],
-        typeIdentification: [],
+        typeIdentificationId: [],
         identification: ['', [Validators.required]],
         occupation: [],
         address: ['', [Validators.required]],
         neighborhoodId: [],
-        phone: ['', [Validators.required]],
+        phone: [
+          '',
+          [
+            Validators.minLength(7),
+            Validators.maxLength(10),
+            Validators.required,
+          ],
+        ],
       }),
       mother: this.formBuilder.group({
         id: [],
@@ -108,12 +120,19 @@ export class EnrollComponent implements OnInit {
         secondName: [],
         firstSurname: ['', [Validators.required]],
         secondSurname: [],
-        typeIdentification: [],
+        typeIdentificationId: [],
         identification: ['', [Validators.required]],
         occupation: [],
         address: ['', [Validators.required]],
         neighborhoodId: [],
-        phone: ['', [Validators.required]],
+        phone: [
+          '',
+          [
+            Validators.minLength(7),
+            Validators.maxLength(10),
+            Validators.required,
+          ],
+        ],
       }),
       legalGuardian: this.formBuilder.group({
         id: [],
@@ -121,21 +140,28 @@ export class EnrollComponent implements OnInit {
         secondName: [],
         firstSurname: ['', [Validators.required]],
         secondSurname: [],
-        typeIdentification: [],
+        typeIdentificationId: [],
         identification: ['', [Validators.required]],
         occupation: [],
         address: ['', [Validators.required]],
         neighborhoodId: [],
-        phone: ['', [Validators.required]],
+        phone: [
+          '',
+          [
+            Validators.minLength(7),
+            Validators.maxLength(10),
+            Validators.required,
+          ],
+        ],
       }),
-      year: [new Date().getFullYear()],
-      grade: [],
+      year: [new Date().getFullYear(), [Validators.required]],
+      grade: [null, [Validators.required]],
       enrollmentNumber: [],
       sheetNumber: [],
       typeLegalGuardian: [],
     });
 
-    this.filteredStates = this.stateCtrl.valueChanges.pipe(
+    this.filteredStates = this.placeOfBirthCtrl.valueChanges.pipe(
       startWith(''),
       switchMap((value) => {
         if (value) {
@@ -185,12 +211,14 @@ export class EnrollComponent implements OnInit {
           this.enrollForm
             .get('typeLegalGuardian')
             ?.patchValue(LegalGuardianEnum.FATHER);
+          this.changePermissionLegalGuardian(true);
           this.showOtherLegalGuardian = !value;
         } else {
           this.showOtherLegalGuardian = true;
           this.enrollForm
             .get('typeLegalGuardian')
             ?.patchValue(LegalGuardianEnum.OTHER);
+          this.changePermissionLegalGuardian(false);
         }
       });
 
@@ -202,12 +230,14 @@ export class EnrollComponent implements OnInit {
           this.enrollForm
             .get('typeLegalGuardian')
             ?.patchValue(LegalGuardianEnum.MOTHER);
+          this.changePermissionLegalGuardian(true);
           this.showOtherLegalGuardian = false;
         } else {
           this.showOtherLegalGuardian = true;
           this.enrollForm
             .get('typeLegalGuardian')
             ?.patchValue(LegalGuardianEnum.OTHER);
+          this.changePermissionLegalGuardian(false);
         }
       });
   }
@@ -254,5 +284,26 @@ export class EnrollComponent implements OnInit {
     } else {
       return of([]);
     }
+  }
+
+  private changePermissionLegalGuardian(remove: boolean) {
+    if (remove) {
+      this.enrollForm.get('legalGuardian.firstName')?.disable()
+      this.enrollForm.get('legalGuardian.firstSurname')?.disable();
+      this.enrollForm.get('legalGuardian.identification')?.disable();
+      this.enrollForm.get('legalGuardian.address')?.disable();
+      this.enrollForm.get('legalGuardian.phone')?.disable();
+    } else {
+      this.enrollForm.get('legalGuardian.firstName')?.enable()
+      this.enrollForm.get('legalGuardian.firstSurname')?.enable();
+      this.enrollForm.get('legalGuardian.identification')?.enable();
+      this.enrollForm.get('legalGuardian.address')?.enable();
+      this.enrollForm.get('legalGuardian.phone')?.enable();
+    }
+  }
+
+
+  log(){
+    console.log(this.enrollForm);
   }
 }

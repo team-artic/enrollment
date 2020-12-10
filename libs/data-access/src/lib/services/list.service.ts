@@ -8,6 +8,7 @@ export enum ListTypes {
   IDENTIFICACION_TYPE = 13,
   BLOOD_TYPE = 1,
   GRADE_TYPE = 102,
+  GENDER_TYPE = 10,
 }
 
 @Injectable()
@@ -26,6 +27,10 @@ export class ListService {
 
   getGradeType(): Observable<GetListModel[]> {
     return this.getListByType(ListTypes.GRADE_TYPE);
+  }
+
+  getGenderType(): Observable<GetListModel[]> {
+    return this.getListByType(ListTypes.GENDER_TYPE);
   }
 
   private getListByType(type: number): Observable<GetListModel[]> {

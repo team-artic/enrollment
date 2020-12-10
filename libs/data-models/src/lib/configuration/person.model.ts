@@ -1,13 +1,13 @@
 export class PersonModel {
   id!: number;
-  typeIdentificationId!: number;
+  identificationTypeId!: number;
   identification!: string;
   firstName!: string;
   secondName!: string;
   firstSurname!: string;
   secondSurname!: string;
   birthDate!: string;
-  generId!: number;
+  genderId!: number;
   placeBirthId!: number;
   bloodGroupId!: number;
   sisben!: boolean;

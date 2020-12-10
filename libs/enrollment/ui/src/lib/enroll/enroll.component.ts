@@ -54,6 +54,7 @@ export class EnrollComponent implements OnInit {
   filteredIdentificationTypes: Observable<GetListModel[]>;
   filteredBloodTypes: Observable<GetListModel[]>;
   filteredGradeTypes: Observable<GetListModel[]>;
+  filteredGenderTypes: Observable<GetListModel[]>;
 
   fatherLegalGuardian = new FormControl();
   motherLegalGuardian = new FormControl();
@@ -73,7 +74,7 @@ export class EnrollComponent implements OnInit {
         secondName: [],
         firstSurname: ['', [Validators.required]],
         secondSurname: [],
-        typeIdentificationId: [],
+        identificationTypeId: [],
         identification: ['', [Validators.required]],
         birthDate: [],
         placeBirthId: [],
@@ -93,6 +94,7 @@ export class EnrollComponent implements OnInit {
         neighborhoodId: [],
         institutionProcedenica: [],
         displaced: [false],
+        genderId: [],
       }),
       father: this.formBuilder.group({
         id: [],
@@ -100,7 +102,7 @@ export class EnrollComponent implements OnInit {
         secondName: [],
         firstSurname: ['', [Validators.required]],
         secondSurname: [],
-        typeIdentificationId: [],
+        identificationTypeId: [],
         identification: ['', [Validators.required]],
         occupation: [],
         address: ['', [Validators.required]],
@@ -120,7 +122,7 @@ export class EnrollComponent implements OnInit {
         secondName: [],
         firstSurname: ['', [Validators.required]],
         secondSurname: [],
-        typeIdentificationId: [],
+        identificationTypeId: [],
         identification: ['', [Validators.required]],
         occupation: [],
         address: ['', [Validators.required]],
@@ -140,7 +142,7 @@ export class EnrollComponent implements OnInit {
         secondName: [],
         firstSurname: ['', [Validators.required]],
         secondSurname: [],
-        typeIdentificationId: [],
+        identificationTypeId: [],
         identification: ['', [Validators.required]],
         occupation: [],
         address: ['', [Validators.required]],
@@ -202,6 +204,7 @@ export class EnrollComponent implements OnInit {
     this.filteredIdentificationTypes = this.listService.getIdentificationTypes();
     this.filteredBloodTypes = this.listService.getBloodTypes();
     this.filteredGradeTypes = this.listService.getGradeType();
+    this.filteredGenderTypes = this.listService.getGenderType();
 
     this.fatherLegalGuardian.valueChanges
       .pipe(distinctUntilChanged())

@@ -102,7 +102,7 @@
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
-              <mat-select formControlName="typeIdentificationId">
+              <mat-select formControlName="identificationTypeId">
                 <mat-option
                   *ngFor="
                     let identificationType of filteredIdentificationTypes
@@ -150,6 +150,17 @@
               [control]="placeOfBirthCtrl"
             ></enrollment-autocomplete>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
+              <mat-label>Genero</mat-label>
+              <mat-select formControlName="genderId" required>
+                <mat-option
+                  *ngFor="let genderType of filteredGenderTypes | async"
+                  [value]="genderType.id"
+                >
+                  {{ genderType.description }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Grupo Sanguíneo</mat-label>
               <mat-select formControlName="bloodGroupId">
                 <mat-option
@@ -176,17 +187,6 @@
                 formControlName="healthPromotingCompany"
               />
             </mat-form-field>
-            <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
-              <mat-label>Telefono</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="phone"
-                required
-                digitOnly
-              />
-            </mat-form-field>
             <mat-form-field fxFlex="calc(50% - 25px)" appearance="outline">
               <mat-label>Dirección</mat-label>
               <input
@@ -197,16 +197,6 @@
                 required
               />
             </mat-form-field>
-            <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
-              <mat-label>Estrato</mat-label>
-              <input
-                matInput
-                autocomplete="off"
-                placeholder=""
-                formControlName="stratum"
-                digitOnly
-              />
-            </mat-form-field>
             <enrollment-autocomplete
               fxFlex="calc(25% - 25px)"
               [data]="filteredNeighborhood"
@@ -215,6 +205,28 @@
               [control]="neighborhoodCtrl"
             >
             </enrollment-autocomplete>
+            <mat-form-field fxFlex="calc(12.5% - 25px)" appearance="outline">
+              <mat-label>Estrato</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                maxlength="1"
+                placeholder=""
+                formControlName="stratum"
+                digitOnly
+              />
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(12.5% - 25px)" appearance="outline">
+              <mat-label>Telefono</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                placeholder=""
+                formControlName="phone"
+                required
+                digitOnly
+              />
+            </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Institución de Procedencia</mat-label>
               <input
@@ -290,7 +302,7 @@
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
-              <mat-select formControlName="typeIdentificationId">
+              <mat-select formControlName="identificationTypeId">
                 <mat-option
                   *ngFor="
                     let identificationType of filteredIdentificationTypes
@@ -418,7 +430,7 @@
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
-              <mat-select formControlName="typeIdentificationId">
+              <mat-select formControlName="identificationTypeId">
                 <mat-option
                   *ngFor="
                     let identificationType of filteredIdentificationTypes
@@ -537,7 +549,7 @@
             </mat-form-field>
             <mat-form-field fxFlex="calc(25% - 25px)" appearance="outline">
               <mat-label>Tipo Identificación</mat-label>
-              <mat-select formControlName="typeIdentificationId">
+              <mat-select formControlName="identificationTypeId">
                 <mat-option
                   *ngFor="
                     let identificationType of filteredIdentificationTypes

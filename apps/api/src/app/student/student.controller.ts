@@ -18,7 +18,7 @@ export class StudentController {
     @Query('page') page = 1,
     @Query('limit') limit = 10
   ): Promise<Pagination<Student>> {
-    limit = limit > 100 ? 100 : limit;
+    limit = 1000;
     return this.studentService.paginate({
       page,
       limit,
@@ -29,6 +29,6 @@ export class StudentController {
   @Post()
   saveEnrollment(@Body() enrollment: StudentModel): Promise<StudentModel> {
     this.logger.verbose(`Save enrollment data ${JSON.stringify(enrollment)}`);
-    return this.studentService.saveEnrollment(enrollment);
+    return this.studentService.saveEnrollment2(enrollment);
   }
 }

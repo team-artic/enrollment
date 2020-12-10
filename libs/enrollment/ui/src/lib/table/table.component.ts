@@ -13,11 +13,12 @@ import { map } from 'rxjs/operators';
 })
 export class TableComponent {
   private gridApi: GridApi | undefined;
+  defaultColDef: any;
 
   data: Observable<GetStudentModel[]>;
 
   columnDefs = [
-    { field: 'identificationType' },
+    { field: 'identification_type' },
     { field: 'identification' },
     { field: 'name' },
     { field: 'gender' },
@@ -27,6 +28,12 @@ export class TableComponent {
 
   constructor(private studentService: StudentService) {
     this.data = this.studentService.getStudents().pipe(map((x) => x.items));
+
+    this.defaultColDef = {
+      flex: 1,
+      minWidth: 150,
+      filter: true,
+    };
   }
 
   onGridReady(params: DetailGridInfo) {

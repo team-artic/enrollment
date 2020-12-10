@@ -17,6 +17,6 @@ export class StudentService {
   }
 
   getStudents() {
-    return this.httpClient.get(`${this.studentUrl}`);
+    return this.httpClient.get<{ items: any[] }>(`${this.studentUrl}`);
   }
 }
